@@ -33,5 +33,6 @@ out/
 ## OS X
 ##########################
 .DS_Store
-.idea/
+.idea/*
 workspace.xml
+JavaAppiumTests.iml
