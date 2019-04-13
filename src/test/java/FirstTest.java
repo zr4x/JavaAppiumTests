@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,6 +42,8 @@ public class FirstTest {
         capabilities.setCapability("avd", "Nexus5x");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        //HomeWork8
+        driver.rotate(ScreenOrientation.PORTRAIT);
     }
 
     @After
@@ -519,5 +522,10 @@ public class FirstTest {
         if (amountOfElements <= 0) {
             throw new AssertionError("Elements dosent present on screen " + errorMessage + " " + by.toString());
         }
+    }
+
+    public String waitForElementAndGetAttribute(By by, String attribute, String errorMessage, long timeOfWait) {
+        WebElement element = waitForElementPresent(by, errorMessage, timeOfWait);
+        return element.getAttribute(attribute);
     }
 }
