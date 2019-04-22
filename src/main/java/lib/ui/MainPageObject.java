@@ -86,7 +86,7 @@ public class MainPageObject {
         );
         for (WebElement element : elements) {
             String text = element.getText().toLowerCase();
-            Assert.assertTrue(text.contains(value.toLowerCase()));
+            assertTrue(text.contains(value.toLowerCase()));
         }
     }
 

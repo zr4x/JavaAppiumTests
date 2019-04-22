@@ -1,7 +1,4 @@
 import lib.CoreTestCase;
-import lib.ui.ArticlePageObject;
-import lib.ui.MyListsPageObject;
-import lib.ui.NavigationUi;
 import lib.ui.SearchPageObject;
 import org.junit.Test;
 
@@ -39,7 +36,6 @@ public class SearchTests extends CoreTestCase {
     }
 
 
-
     //Refactoring HomeWork 3
     @Test
     public void testCorrectSearch() {
@@ -51,11 +47,19 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.typeSearchLine(searchText);
         searchPageObject.checkThatSearhListHaveTitle(searchText);
 
+    }
+    //HomeWork 9
+    @Test
+    public void testWaitForArticlesByTitleAndDescription() {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Python");
+
+        searchPageObject.waitForElementByTitleAndDescription("Python", "Wikimedia disambiguation page");
+        searchPageObject.waitForElementByTitleAndDescription("Python (programming language)", "General-purpose, high-level programming language");
+        searchPageObject.waitForElementByTitleAndDescription("Python (missile)", "Family of air-to-air missiles");
 
     }
-
-
-
 
 
 }

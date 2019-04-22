@@ -13,7 +13,8 @@ public class SearchPageObject extends MainPageObject {
                     "//*[@text='{SUBSTRING}']",
             SEARCH_RESULTS = "org.wikipedia:id/page_list_item_container",
             SEARCH_EMPTY_IMG = "org.wikipedia:id/search_empty_image",
-            SEARCH_RESULT_ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title";
+            SEARCH_RESULT_ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title",
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "//*[@text='{ARTICLE_TITLE}']/../*[@text='{ARTICLE_DESCRIPTION}']/..";
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -23,11 +24,18 @@ public class SearchPageObject extends MainPageObject {
     private static String getResultSearchElement(String substring) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
+
+    private static String searchResultByTitleAndDescription(String title, String description) {
+        return SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL
+                .replace("{ARTICLE_TITLE}", title)
+                .replace("{ARTICLE_DESCRIPTION}", description);
+
+    }
+
     /*TEMPLATE METHODS */
 
 
-    public void initSearchInput()
-    {
+    public void initSearchInput() {
         this.waitForElementPresentAndClick(By.id(SEARCH_INIT_ELEMENT), "Cannot find and click init element", 5);
         this.waitForElementPresent(By.id(SEARCH_INIT_ELEMENT), "Cannot find search after clicking search init element");
     }
@@ -57,7 +65,7 @@ public class SearchPageObject extends MainPageObject {
 
     public void waitForCancelButtonDisappear() {
 
-        this.waitForElementNotPresent(By.id(SEARCH_CANCEL_BUTTON), "X button still present",5);
+        this.waitForElementNotPresent(By.id(SEARCH_CANCEL_BUTTON), "X button still present", 5);
     }
 
     public void clickCancelSearch() {
@@ -75,12 +83,20 @@ public class SearchPageObject extends MainPageObject {
     }
 
     public void checkThatSearhListHaveTitle(String text) {
-        this.checkElementsText(By.id(SEARCH_RESULT_ARTICLE_TITLE), text, "Search result dosent have title "+text, 5);
+        this.checkElementsText(By.id(SEARCH_RESULT_ARTICLE_TITLE), text, "Search result dosent have title " + text, 5);
     }
 
     public int getAmoutOfFoundArticles() {
         this.waitForElementPresent(By.id(SEARCH_RESULTS), "Cant find any search result");
         return getAmountOfElements(By.id(SEARCH_RESULTS));
+    }
+
+    public void waitForElementByTitleAndDescription(String title, String description) {
+        this.waitForElementPresent(
+                By.xpath(searchResultByTitleAndDescription(title, description)),
+                "Cannot find article by title: " + "'" + title + "'" + " and description: " + "'" + description + "'" + " in search results",
+                10
+        );
     }
 
 }
