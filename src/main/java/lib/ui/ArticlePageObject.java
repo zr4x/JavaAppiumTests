@@ -7,15 +7,15 @@ import org.openqa.selenium.WebElement;
 public class ArticlePageObject extends MainPageObject {
 
     private static final String
-            ARTICLE_TITLE = "org.wikipedia:id/view_page_title_text",
-            FOOTER_ELEMENT = "org.wikipedia:id/page_external_link",
-            OPTIONS_BUTTON = "//android.widget.ImageView[@content-desc='More options']",
-            OPTIONS_ADD_TO_MY_LIST_BUTTON = "//*[@text='Add to reading list']",
-            ADD_TO_MY_LIST_OVERLAY = "org.wikipedia:id/onboarding_button",
-            MY_LIST_NAME_INPUT = "org.wikipedia:id/text_input",
-            MY_LIST_OK_BUTTON = "android:id/button1",
-            ARTICLE_CLOSE_BUTTON = "//android.widget.ImageButton[@content-desc='Navigate up']",
-            FOLDER_NAME_TMPL = "//*[@resource-id='org.wikipedia:id/item_title'][@text='{FOLDER_NAME}']";
+            ARTICLE_TITLE = "id:org.wikipedia:id/view_page_title_text",
+            FOOTER_ELEMENT = "id:org.wikipedia:id/page_external_link",
+            OPTIONS_BUTTON = "xpath://android.widget.ImageView[@content-desc='More options']",
+            OPTIONS_ADD_TO_MY_LIST_BUTTON = "xpath://*[@text='Add to reading list']",
+            ADD_TO_MY_LIST_OVERLAY = "id:org.wikipedia:id/onboarding_button",
+            MY_LIST_NAME_INPUT = "id:org.wikipedia:id/text_input",
+            MY_LIST_OK_BUTTON = "id:android:id/button1",
+            ARTICLE_CLOSE_BUTTON = "xpath://android.widget.ImageButton[@content-desc='Navigate up']",
+            FOLDER_NAME_TMPL = "xpath://*[@resource-id='org.wikipedia:id/item_title'][@text='{FOLDER_NAME}']";
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);
@@ -29,7 +29,7 @@ public class ArticlePageObject extends MainPageObject {
     /*TEMPLATE METHODS */
 
     public WebElement waitForTitleElement() {
-        return this.waitForElementPresent(By.id(ARTICLE_TITLE), "Cannot find title article on screen", 15);
+        return this.waitForElementPresent(ARTICLE_TITLE, "Cannot find title article on screen", 15);
     }
 
     public String getArticleTitle() {
@@ -39,36 +39,37 @@ public class ArticlePageObject extends MainPageObject {
 
     public void swipeToFooter() {
         this.swipeUpToFindElement(
-                By.id(FOOTER_ELEMENT),
+                FOOTER_ELEMENT,
                 "Cant find footer element",
                 20);
     }
 
     public void addFirstArticleToMyList(String nameOfFolder) {
+
             waitForElementPresentAndClick(
-                    By.xpath(OPTIONS_BUTTON),
+                    OPTIONS_BUTTON,
                     "Cannot find more options button"
             );
 
             waitForElementPresentAndClick(
-                    By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                    OPTIONS_ADD_TO_MY_LIST_BUTTON,
                     "Cannot find or click to reading list"
             );
 
             waitForElementPresentAndClick(
-                    By.id(ADD_TO_MY_LIST_OVERLAY),
+                    ADD_TO_MY_LIST_OVERLAY,
                     "Cant click to GOT IT tip overlay"
             );
 
 
             waitForElementAndSendKeys(
-                    By.id(MY_LIST_NAME_INPUT),
+                    MY_LIST_NAME_INPUT,
                     nameOfFolder,
                     "cant input text in artice folder"
             );
 
             waitForElementPresentAndClick(
-                    By.id(MY_LIST_OK_BUTTON),
+                    MY_LIST_OK_BUTTON,
                     "Cannot press OK button"
             );
     }
@@ -76,12 +77,12 @@ public class ArticlePageObject extends MainPageObject {
 
     public void addSecondArticleToCreatedFolder(String nameOfFolder) {
         waitForElementPresentAndClick(
-                By.xpath(OPTIONS_BUTTON),
+                OPTIONS_BUTTON,
                 "Cannot find more options button"
         );
 
         waitForElementPresentAndClick(
-                By.xpath(OPTIONS_ADD_TO_MY_LIST_BUTTON),
+                OPTIONS_ADD_TO_MY_LIST_BUTTON,
                 "Cannot find or click to reading list"
         );
 
@@ -91,7 +92,7 @@ public class ArticlePageObject extends MainPageObject {
 
     public void closeArticle () {
         waitForElementPresentAndClick(
-                By.xpath(ARTICLE_CLOSE_BUTTON),
+                ARTICLE_CLOSE_BUTTON,
                 "Cannot find or press close up button"
         );
     }
@@ -99,12 +100,12 @@ public class ArticlePageObject extends MainPageObject {
     public void choseFolderToSaveArticleToMyList(String folderName) {
 
         waitForElementPresentAndClick(
-                By.xpath(getFolderNameByTmpl(folderName)),
+                getFolderNameByTmpl(folderName),
                 "cant find folder"
         );
     }
 
     public void getTitleWithoutWaiting() {
-        assertElementPresent(By.id(ARTICLE_TITLE), "Cant find article TITLE");
+        assertElementPresent(ARTICLE_TITLE, "Cant find article TITLE");
     }
 }

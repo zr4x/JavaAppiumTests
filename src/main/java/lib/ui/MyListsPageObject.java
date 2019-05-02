@@ -5,9 +5,9 @@ import org.openqa.selenium.By;
 
 public class MyListsPageObject extends MainPageObject {
     private final static String
-            FOLDER_BY_NAME_TMPL = "//*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE_TMPL = "//*[@text='{ARTICLE_TITLE}']",
-            ARTICLE_TITLE = "org.wikipedia:id/page_list_item_title";
+            FOLDER_BY_NAME_TMPL = "xpath://*[@text='{FOLDER_NAME}']",
+            ARTICLE_BY_TITLE_TMPL = "xpath://*[@text='{ARTICLE_TITLE}']",
+            ARTICLE_TITLE = "id:org.wikipedia:id/page_list_item_title";
 
     public MyListsPageObject(AppiumDriver driver) {
         super(driver);
@@ -25,7 +25,7 @@ public class MyListsPageObject extends MainPageObject {
 
     public void openFolderByName(String folderName) {
         waitForElementPresentAndClick(
-                By.xpath(getFolderName(folderName)),
+                getFolderName(folderName),
                 "Cant find folder by name " + folderName
         );
 
@@ -33,19 +33,19 @@ public class MyListsPageObject extends MainPageObject {
     }
 
     public void waitForArticleToAppearByTitle(String articleTitle) {
-        waitForElementPresent(By.xpath(getSavedXpathByTitle(articleTitle)),
+        waitForElementPresent(getSavedXpathByTitle(articleTitle),
                 "Article is doesn't here", 5);
     }
 
     public void waitForArticleToDisappearByTitle(String articleTitle) {
-        waitForElementNotPresent(By.xpath(getSavedXpathByTitle(articleTitle)),
+        waitForElementNotPresent(getSavedXpathByTitle(articleTitle),
                 "Article is still here", 5);
     }
 
     public void swipeByArticleToDelete(String articleTitle) {
         String article = getSavedXpathByTitle(articleTitle);
         swipeElementToLeft(
-                By.xpath(article),
+                article,
                 "cant find saved article"
         );
         waitForArticleToDisappearByTitle(article);
@@ -53,12 +53,12 @@ public class MyListsPageObject extends MainPageObject {
 
 
     public String getArticleTitle() {
-        return waitForElementAndGetAttribute(By.id(ARTICLE_TITLE), "text","Cant find any article in folder",5);
+        return waitForElementAndGetAttribute(ARTICLE_TITLE, "text","Cant find any article in folder",5);
     }
 
     public void clickToArticleInFolder(String articleTitle) {
         String article = getSavedXpathByTitle(articleTitle);
-        waitForElementPresentAndClick(By.xpath(article), "Cant Find Article");
+        waitForElementPresentAndClick(article, "Cant Find Article");
     }
 
 }

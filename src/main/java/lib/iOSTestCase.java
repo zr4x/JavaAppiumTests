@@ -22,8 +22,6 @@ public class iOSTestCase extends TestCase {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-
-
         driver = new IOSDriver(new URL(AppiumURL), capabilities);
         //Refactoring HomeWork8
         rotateScreenPortrait();
