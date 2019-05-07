@@ -1,20 +1,20 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String
-            SEARCH_INIT_ELEMENT = "id:org.wikipedia:id/search_container",
-            SEARCH_INPUT = "xpath://*[contains(@text, 'Search…')]",
-            SEARCH_CANCEL_BUTTON = "id:org.wikipedia:id/search_close_btn",
-            SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id='org.wikipedia:id/page_list_item_container']" +
-                    "//*[@text='{SUBSTRING}']",
-            SEARCH_RESULTS = "id:org.wikipedia:id/page_list_item_container",
-            SEARCH_EMPTY_IMG = "id:org.wikipedia:id/search_empty_image",
-            SEARCH_RESULT_ARTICLE_TITLE = "id:org.wikipedia:id/page_list_item_title",
-            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://*[@text='{ARTICLE_TITLE}']/../*[@text='{ARTICLE_DESCRIPTION}']/..";
+    protected static String
+            SEARCH_INIT_ELEMENT,
+            SEARCH_INPUT,
+            SEARCH_CANCEL_BUTTON,
+            SEARCH_RESULT_BY_SUBSTRING_TPL,
+            SEARCH_RESULTS,
+            SEARCH_EMPTY_IMG,
+            SEARCH_RESULT_ARTICLE_TITLE,
+            SEARCH_EMPTY_RESULT_TEXT,
+            SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL,
+            CLEAR_SEARCH;
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -27,7 +27,7 @@ public class SearchPageObject extends MainPageObject {
 
     private static String searchResultByTitleAndDescription(String title, String description) {
         return SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL
-                .replace("{ARTICLE_TITLE}", title)
+                .replace("{TITLE}", title)
                 .replace("{ARTICLE_DESCRIPTION}", description);
 
     }
@@ -97,6 +97,11 @@ public class SearchPageObject extends MainPageObject {
                 "Cannot find article by title: " + "'" + title + "'" + " and description: " + "'" + description + "'" + " in search results",
                 10
         );
+
+    }
+
+    public void clearSearchFieldMethodForIOS() {
+        waitForElementPresentAndClick(CLEAR_SEARCH, "Cannot find clear button");
     }
 
 }

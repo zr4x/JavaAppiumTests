@@ -1,13 +1,14 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import lib.Platform;
 
-public class MyListsPageObject extends MainPageObject {
-    private final static String
-            FOLDER_BY_NAME_TMPL = "xpath://*[@text='{FOLDER_NAME}']",
-            ARTICLE_BY_TITLE_TMPL = "xpath://*[@text='{ARTICLE_TITLE}']",
-            ARTICLE_TITLE = "id:org.wikipedia:id/page_list_item_title";
+
+abstract public class MyListsPageObject extends MainPageObject {
+    protected static String
+            FOLDER_BY_NAME_TMPL,
+            ARTICLE_BY_TITLE_TMPL,
+            ARTICLE_TITLE;
 
     public MyListsPageObject(AppiumDriver driver) {
         super(driver);
@@ -19,7 +20,7 @@ public class MyListsPageObject extends MainPageObject {
     }
 
     private static String getSavedXpathByTitle(String substring) {
-        return ARTICLE_BY_TITLE_TMPL.replace("{ARTICLE_TITLE}", substring);
+        return ARTICLE_BY_TITLE_TMPL.replace("{TITLE}", substring);
     }
     /*TEMPLATE METHODS */
 
@@ -28,8 +29,6 @@ public class MyListsPageObject extends MainPageObject {
                 getFolderName(folderName),
                 "Cant find folder by name " + folderName
         );
-
-
     }
 
     public void waitForArticleToAppearByTitle(String articleTitle) {
@@ -48,6 +47,9 @@ public class MyListsPageObject extends MainPageObject {
                 article,
                 "cant find saved article"
         );
+        if (Platform.getInstance().isIOS()) {
+            clickElementToTheRightUpperCorner(article, "Cannot find saved article");
+        }
         waitForArticleToDisappearByTitle(article);
     }
 
