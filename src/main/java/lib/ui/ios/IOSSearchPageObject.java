@@ -17,7 +17,8 @@ public class IOSSearchPageObject extends SearchPageObject {
         SEARCH_EMPTY_IMG = "id:org.wikipedia:id/search_empty_image";
         SEARCH_EMPTY_RESULT_TEXT = "xpath://XCUIElementTypeStaticText[@name='No results found']";
         SEARCH_RESULT_ARTICLE_TITLE = "id:org.wikipedia:id/page_list_item_title";
-        SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://*[@text='{TITLE}']/../*[@text='{ARTICLE_DESCRIPTION}']/..";
+        //HomeWork 12
+        SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://XCUIElementTypeLink[contains(@name, '{TITLE}\n{ARTICLE_DESCRIPTION}')]";
     }
 
     public IOSSearchPageObject(AppiumDriver driver) {

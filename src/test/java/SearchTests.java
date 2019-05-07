@@ -49,7 +49,7 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.checkThatSearhListHaveTitle(searchText);
 
     }
-    //HomeWork 9
+    //refactoring for ios HomeWork 12
     @Test
     public void testWaitForArticlesByTitleAndDescription() {
         SearchPageObject searchPageObject = SearchPageObjectFactory.get(driver);
