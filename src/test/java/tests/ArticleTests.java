@@ -1,3 +1,5 @@
+package tests;
+
 import lib.CoreTestCase;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
@@ -15,7 +17,7 @@ public class ArticleTests extends CoreTestCase {
 
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
-        searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        searchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         System.out.println(articlePageObject.getArticleTitle());
 
@@ -29,7 +31,7 @@ public class ArticleTests extends CoreTestCase {
 
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
-        searchPageObject.clickByArticleWithSubstring("Object-oriented programming language");
+        searchPageObject.clickByArticleWithSubstring("bject-oriented programming language");
 
         articlePageObject.waitForTitleElement();
         articlePageObject.swipeToFooter();

@@ -1,3 +1,5 @@
+package tests;
+
 import lib.CoreTestCase;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
@@ -17,7 +19,7 @@ public class SearchTests extends CoreTestCase {
 
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Java");
-        searchPageObject.waitForSearchResult("Object-oriented programming language");
+        searchPageObject.waitForSearchResult("bject-oriented programming language");
     }
 
     //Refactoring Ex3
@@ -46,7 +48,7 @@ public class SearchTests extends CoreTestCase {
         //Test Script
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine(searchText);
-        searchPageObject.checkThatSearhListHaveTitle(searchText);
+        searchPageObject.checkThatSearchListHaveTitle(searchText);
 
     }
     //refactoring for ios HomeWork 12

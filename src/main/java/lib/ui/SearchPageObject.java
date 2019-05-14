@@ -1,6 +1,8 @@
 package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
+import lib.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 abstract public class SearchPageObject extends MainPageObject {
 
@@ -16,7 +18,7 @@ abstract public class SearchPageObject extends MainPageObject {
             SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL,
             CLEAR_SEARCH;
 
-    public SearchPageObject(AppiumDriver driver) {
+    public SearchPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -41,40 +43,37 @@ abstract public class SearchPageObject extends MainPageObject {
     }
 
     public void typeSearchLine(String searchLine) {
-
         this.waitForElementAndSendKeys(SEARCH_INPUT, searchLine, "Cannot find and type into search input", 5);
+        if (Platform.getInstance().isAndroid()) {
+            AppiumDriver driver = (AppiumDriver) this.driver;
+            driver.hideKeyboard();
+        }
 
     }
 
     public void waitForSearchResult(String substring) {
-
         String searchResult = getResultSearchElement(substring);
         this.waitForElementPresent(searchResult, "Cant find result with substring: " + substring);
     }
 
     public void clickByArticleWithSubstring(String substring) {
-
         String searchResult = getResultSearchElement(substring);
         this.waitForElementPresentAndClick(searchResult, "Cant find and click  with substring: " + substring);
     }
 
     public void waitForCancelButtonAppear() {
-
         this.waitForElementPresent(SEARCH_CANCEL_BUTTON, "Cannot find X button on screen");
     }
 
     public void waitForCancelButtonDisappear() {
-
         this.waitForElementNotPresent(SEARCH_CANCEL_BUTTON, "X button still present", 5);
     }
 
     public void clickCancelSearch() {
-
         this.waitForElementPresentAndClick(SEARCH_CANCEL_BUTTON, "Cant click on X button");
     }
 
     public void checkThatSearchListHaveResults(long timeOutInSecends) {
-
         this.checkAvailableElements(SEARCH_RESULTS, "0 elements after search", timeOutInSecends);
     }
 
@@ -82,7 +81,7 @@ abstract public class SearchPageObject extends MainPageObject {
         this.waitForElementPresent(SEARCH_EMPTY_IMG, "Cant find zero result img. Maybe you dosent cancel search", 5);
     }
 
-    public void checkThatSearhListHaveTitle(String text) {
+    public void checkThatSearchListHaveTitle(String text) {
         this.checkElementsText(SEARCH_RESULT_ARTICLE_TITLE, text, "Search result dosent have title " + text, 5);
     }
 

@@ -1,6 +1,6 @@
 package lib.ui;
 
-import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WelcomePageObject extends MainPageObject {
 
@@ -13,7 +13,7 @@ public class WelcomePageObject extends MainPageObject {
             GET_STARTED_BUTTON = "id:Get started",
             SKIP_BUTTON = "id:Skip";
 
-    public WelcomePageObject(AppiumDriver driver) {
+    public WelcomePageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
@@ -36,6 +36,7 @@ public class WelcomePageObject extends MainPageObject {
     public void clickNextButton() {
         waitForElementPresentAndClick(NEXT_BUTTON, "cant find Next link on screen");
     }
+
     public void clickGetStartedButton() {
         waitForElementPresentAndClick(GET_STARTED_BUTTON, "cant find 'Get started' button");
     }
