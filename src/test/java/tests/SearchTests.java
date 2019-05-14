@@ -58,9 +58,9 @@ public class SearchTests extends CoreTestCase {
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Python");
 
-        searchPageObject.waitForElementByTitleAndDescription("Python", "Wikimedia disambiguation page");
-        searchPageObject.waitForElementByTitleAndDescription("Python (programming language)", "General-purpose, high-level programming language");
-        searchPageObject.waitForElementByTitleAndDescription("Python (missile)", "Family of air-to-air missiles");
+        searchPageObject.waitForElementByTitleAndDescription("Python", "isambiguation page providing links to topics that could be referred to by the same search term");
+        searchPageObject.waitForElementByTitleAndDescription("Python (programming language)", "eneral-purpose, high-level programming language");
+        searchPageObject.waitForElementByTitleAndDescription("Python (missile)", "amily of air-to-air missiles");
 
     }
 

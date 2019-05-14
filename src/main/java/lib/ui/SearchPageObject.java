@@ -93,7 +93,7 @@ abstract public class SearchPageObject extends MainPageObject {
     public void waitForElementByTitleAndDescription(String title, String description) {
         this.waitForElementPresent(
                 searchResultByTitleAndDescription(title, description),
-                "Cannot find article by title: " + "'" + title + "'" + " and description: " + "'" + description + "'" + " in search results",
+                "Cannot find article by title: " + "'" + title + "'" + " and description: " + "'" + description + "'" + " in search results" + SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL,
                 10
         );
 
